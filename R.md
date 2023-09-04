@@ -697,4 +697,152 @@ legend("topleft", inset=0.05, title="类型", legend=c("A", "B"), lty=c(1,2), co
   data
   ```
 
+
+## 视频18
+
+* 数据集的合并
+
+  ```R
+  # 创建一个 3*3 的矩阵
+  x <- matrix(c(1,2,3,4,5,6,7,8,9), nrow=3,ncol=3)
+  x
+  y <- x
+  y
+  # cbind 将 x， y 两个向量按照列合并，也就是 y 的数据放在 x 的列后面，因此需要 x 的行 和 y 的行一致
+  z <- cbind(x, y)
+  z
+  # 设置两个不一样的数据框
+  x <- data.frame(k1 = c(NA,NA,3,4,5), k2 = c(1,NA,NA,4,5), data = 1:5)
+  y <- data.frame(k1 = c(NA,2,NA,4,5), k2 = c(NA,NA,3,4,5), data = 1:5)
+  x
+  y
+  #　将 x ,y 数据框的内容按照 "k1" 关键字内联合并，和数据库类似
+  z <- merge(x, y, by="k1")
+  z
+  # rbind 将 x, y 两个向量按照行合并，也就是 y 的数据放在 x 行的后面，因此需要 x 的列和 y 的列一致
+  z <- rbind(x, y)
+  z
+  ```
+
+* 数据提取子集
+
+  ```R
+  # 创建数据框
+  manager<- c(1,2,3,4,5)
+  date <- c("10/24/08", "10/28/08", "10/1/08", "10/12/08", "5/1/09")
+  country <- c("US", "US", "UK", "UK", "UK")
+  gender <- c("M", "F", "F", "M", "F")
+  age <- c(32,45,25 ,39 ,99)
+  q1 <- c(5,3,3,3,2)
+  q2 <- c(4 , 5,5,3,2)
+  q3 <- c(5,2,5,4,1)
+  q4 <- c(5,5,5,NA,2)
+  q5 <- c(5,5,2,NA,1)
+  survey <- data.frame(manager, date, country, gender, age, q1, q2, q3, q4, q5, stringsAsFactors = FALSE)
+  survey
+  # 6到 10 列的数据
+  q <- survey[, 6:10]
+  q
+  # 不选第二列的数据
+  x <- survey[, -2]
+  x
+  # subset 选取数据子集函数 这里选取 年龄 大于等于 35，或者年龄小于24岁的行，且只需要 select 中的列
+  newdata <- subset(survey, age >= 35 | age < 24, select=c(q1,q2,q3,q4))
+  newdata
+  ```
+
   
+
+* 随机抽样函数
+
+  ````R
+  # 随机从 5 行数据中随机选取 3 个数据，replace 表示不放回随机抽样 强烈建议读者此语句多试几次，感受随机
+  mysample <- survey[sample(5, 3, replace = FALSE), ]
+  mysample
+  ````
+
+  
+
+## 视频 19
+
+* 数学函数
+
+  ```R
+  # 绝对值函数
+  abs(-3)
+  # 平方根函数
+  sqrt(9)
+  # ceiling(x) 返回 >= x 的最小整数
+  ceiling(4.5)
+  # floor(x) 返回 <= x 的最小整数
+  floor(4.5)
+  # round(x) 对x 进行四舍五入
+  round(3.45)
+  round(3.55)
+  # 求 sin(x)
+  sin(4)
+  sin(3.14/2)
+  # 求 cos(x)
+  cos(3.14/2)
+  # log(2.718281828459)=1 log(x) 相当于 ln(x)
+  log(10)
+  ```
+
+* 统计函数
+
+  ```R
+  # 创建向量
+  x <- c(2,3,4,1,3,7,4,9,10)
+  #求向量平均值
+  mean(x)
+  # 求向量之和
+  sum(x)
+  # 另外一种求向量平均值的方法
+  n <- length(x)
+  n
+  meanx <- sum(x) / n
+  meanx
+  # 求标准差
+  sd(x)
+  # 求方差
+  var(x)
+  # 求最大值
+  max(x)
+  # 求最小值
+  min(x)
+  # 对向量进行归一化
+  scale(x)
+  ```
+
+* 概率函数
+
+​	![](images\probility.png)
+
+````R
+# pretty 均匀地生成30个 -3到3 数 
+x <- pretty(c(-3,3), 30)
+x
+# 根据 x 生成相应标准正态分布的概率密度函数值
+dnorm(x)
+y <- dnorm(x)
+# 画出 x，y的对应图
+plot(x, y)
+# 根据 x 生成相应标准正太分布的分布函数值
+y <- pnorm(x)
+y
+plot(x, y)
+# 生成 50个 均值为 50，标准差为8的随机数
+rnorm(50, sd=8, mean = 50)
+runif(5)
+runif(5)
+# 设定随机种子，接下来的随机数也会根据这个随机种子生成，但是注意此语句只生效一次，也就是说需要重新输入该语句才能再次设定该随机种子
+set.seed(12)
+# 生成 5 个随机数
+runif(5)
+# 此处随机种子重置 和 12 不一样，因此其结果和上面的不一样
+runif(5)
+# 此处和随机种子为 12 的一样
+set.seed(12)
+runif(5)
+````
+

@@ -912,5 +912,44 @@ cat("I love", "you")
 ## 视频 21
 
 * 重复和循环
+
+  ```R
+  # for 循环的使用
+  for (i in 1:5) print("I love you")
+  # while 循环的使用
+  x <- 5
+  while (x > 0) {
+      print("I love you")
+      x <- x - 1
+  }
+  ```
+
+  
+
 * 条件执行
+
+  ````R
+  x <- 1
+  # if 语句，注意要是有 else 似乎必须一行
+  if (x != 1) print("male") else print("female")
+  
+  # ifelse(condition, x, y) condition 成立则执行 x ，否则执行 y
+  ifelse(x > 1, "female", "male")
+  # 创建向量
+  feeling <- c("sad", "afraid")
+  # switch 语句使用
+  for (i in feeling)
+      print(switch(i, happy="I am glad", afraid="fear", sad="cheer up"))
+  ````
+
 * 转置
+
+  ````R
+  library(car)
+  cars <- mtcars[1:5,1:4]
+  cars
+  # t(x) 对矩阵x转置
+  t(cars)
+  ````
+
+  

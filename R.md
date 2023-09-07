@@ -952,4 +952,63 @@ cat("I love", "you")
   t(cars)
   ````
 
+## 视频 22
+
+先安装包 `install.packages("vcd")` 
+
+* 简单的条形图
+
+  ````R
+  barplot(c(1,4,3,6,2,8,5))
+  # horiz = TRUE 让条形图水平
+  barplot(c(1,4,3,6,2,8,5), horiz = TRUE)
+  # table 函数构建列链表 统计每个因子的频数
+  counts <- table(Arthritis$Improved)
+  counts
+  barplot(counts)
+  barplot(counts, horiz = TRUE)
+  ````
+
   
+
+* 堆砌、分组条形图
+
+  ````R
+  # 构建矩阵
+  counts <- table(Arthritis$Improved, Arthritis$Treatment)
+  counts
+  # 堆砌图
+  barplot(counts)
+  # beside = TRUE 可以分组
+  barplot(counts, beside = TRUE)
+  ````
+
+  
+
+* 均值条形图
+
+  ````R
+  # 构建数据框
+  states <- data.frame(state.region, state.x77)
+  # 根据离散值求得相应列的平均值
+  x <- aggregate(states$Illiteracy, by=list(state.region), FUN=mean)
+  x
+  # names.arg 为行取名
+  barplot(x$x, names.arg = x$Group.1)
+  ````
+
+  关于更多 `aggregate` 函数见网址 [https://zhuanlan.zhihu.com/p/512377710](https://zhuanlan.zhihu.com/p/512377710)
+
+* 条形图的微调
+
+  ````R
+  opar <- par(no.readonly = TRUE)
+  par(mar=c(5,8,4,2))
+  counts <- table(Arthritis$Improved)
+  barplot(counts, horiz = TRUE, cex.names = 1.5, names.arg = c("no improved", "some improved", "marked improved"))
+  # 可以对比设置 las = 2 前后的图像
+  par(las=2)
+  barplot(counts, horiz = TRUE, cex.names = 0.8, names.arg = c("no improved", "some improved", "marked improved"))
+  ````
+
+  小结：关于微调，是科研图制作中必备的一步，也是让图变好看很重要的一步！

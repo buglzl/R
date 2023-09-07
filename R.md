@@ -814,6 +814,8 @@ legend("topleft", inset=0.05, title="类型", legend=c("A", "B"), lty=c(1,2), co
   scale(x)
   ```
 
+  另外，如果需要对 `scale` 函数需要有更多了解，看网址 [https://zhuanlan.zhihu.com/p/30518877](https://zhuanlan.zhihu.com/p/30518877)
+
 * 概率函数
 
 ​	![](images\probility.png)
@@ -837,7 +839,7 @@ runif(5)
 runif(5)
 # 设定随机种子，接下来的随机数也会根据这个随机种子生成，但是注意此语句只生效一次，也就是说需要重新输入该语句才能再次设定该随机种子
 set.seed(12)
-# 生成 5 个随机数
+# 生成均匀分布随机数的函数 5 个随机数,默认在 [0,1] 之间
 runif(5)
 # 此处随机种子重置 和 12 不一样，因此其结果和上面的不一样
 runif(5)
@@ -846,3 +848,69 @@ set.seed(12)
 runif(5)
 ````
 
+## 视频 20
+
+* 字符处理函数
+
+  ````R
+  # 计算字符串长度
+  nchar("abcde")
+  # 取子串
+  substr("abcde", 3,4)
+  # 查找在字符串向量中某字符串出现的位置
+  grep("a", c("a", "b", "a", "d"))
+  # substr(str1, str2, str) 将在 str 中查找到的第一个字串 str1 替换为 str2，如果没有则不处理
+  sub("a", "A", "adbda")
+  sub("a", "A", "aaaaa")
+  # strsplit(str, str2) 根据 str2 分割开
+  strsplit("abcde", "c")
+  # 根据每个字母分割开
+  strsplit("abcde", "")
+  # paste(str1, str2) 将 str1 和 str2 连接起来
+  paste("I love", "you")
+  # 将字符串的全部字母变成大写
+  toupper("adFdfs")
+  # 将字符串的全部字母变成小写
+  tolower("ASDJHI")
+  ````
+
+* 其他实用函数
+
+````R
+# 求向量长度
+length(c(1,2,5,6))
+# seq(l, r, by) 从 l 开始，每次增量为 by，直到取到 10
+seq(1, 10, 2)
+# 从 1 到 3 重复 3 次
+rep(1:3, 3)
+# 连接并输出
+cat("I love", "you")
+
+````
+
+* 将函数运用于矩阵和数据框
+
+  ````R
+  # 创建向量，并对整个向量的数值进行四舍五入
+  x <- c(1.234, 2.345, 3.564)
+  round(x)
+  # 创建矩阵，并求其平均值
+  y <- matrix(runif(12), nrow=3)
+  y
+  mean(y)
+  # 创建矩阵
+  z <- matrix(rnorm(30), nrow=6)
+  z
+  # 对行求平均值
+  apply(z, 1, mean)
+  # 对列求品均值
+  apply(z, 2, mean)
+  ````
+
+  另外，还有 `lapply` `sapply` 可以对列表（list）进行操作，可自行搜索。
+
+## 视频 21
+
+* 重复和循环
+* 条件执行
+* 转置

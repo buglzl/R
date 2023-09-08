@@ -1085,4 +1085,18 @@ cat("I love", "you")
   sm.density.compare(mpg, cyl, main="Mile per gallon")
   ````
 
-  
+## 视频 26
+
+* 箱线图
+
+![](images\boxplot.png)
+
+其中有些点可能在直线部分算是异常值
+
+````R
+# 绘制简单箱线图
+boxplot(mpg, main="box plot", ylab="Miles per gallon")
+# mpg~cyl: 这是箱线图的数据设置。mpg 是要绘制的Y轴变量（在这里是"每加仑英里数"，即汽车的燃油效率），而 cyl 是X轴变量（在这里是"汽缸数"，即汽车引擎的汽缸数量）。~ 符号表示以 cyl 为条件对 mpg 进行分组，即将数据按照不同汽缸数进行分组并绘制箱线图。
+boxplot(mpg~cyl,data=mtcars,main="Car mileage data", xlab = "Number of cylinders", ylab = "Miles per gallon")
+````
+

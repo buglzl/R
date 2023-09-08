@@ -1068,4 +1068,21 @@ cat("I love", "you")
   lines(density(x), col="red", lwd=2)
   ````
 
+## 视频 25
+
+* 核密度图
+
+  ````R
+  # 得到向量的密度
+  x <- density(mtcars$mpg)
+  x
+  # 直接绘制核密度图
+  plot(x)
+  
+  attach(mtcars)
+  library(sm)
+  # 绘制不同汽车相应的核密度图
+  sm.density.compare(mpg, cyl, main="Mile per gallon")
+  ````
+
   

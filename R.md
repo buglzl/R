@@ -1046,3 +1046,26 @@ cat("I love", "you")
   ````
 
   另外，关于更多的颜色使用，可查看下面的网址：[https://zhuanlan.zhihu.com/p/392009162](https://zhuanlan.zhihu.com/p/392009162)
+
+## 视频 24
+
+* 直方图
+
+  ````R
+  # 得到一个向量
+  x <- mtcars$mpg
+  x
+  # 简单地画出 x 的直方图
+  hist(x)
+  # breaks 描述直方图要分成几份
+  hist(x, breaks=12, col="red", xlab="Miles per callon")
+  # freq=FALSE 表示 y轴不再是显示频数，而是密度频率
+  hist(x, freq=FALSE, col="green", xlab="Miles per callon", breaks=12)
+  # 第一在内部函数jitter(mtcars$mgp)这个函数是把相同的数据打散，这样在后面的求轴密度的时候就可以更准确的描述数据的分布
+  # 其次rug(x),是添加数据的轴须图，什么是轴须图，就是描述数据分布的的一种图，是一种小短线，短线越密集说明这段区间数据的分布越密集
+  rug(jitter(x))
+  # 在上一轮的途中画线
+  lines(density(x), col="red", lwd=2)
+  ````
+
+  

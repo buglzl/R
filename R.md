@@ -1012,3 +1012,37 @@ cat("I love", "you")
   ````
 
   小结：关于微调，是科研图制作中必备的一步，也是让图变好看很重要的一步！
+
+## 视频 23
+
+* 饼图
+
+  `install.packets("plotrix")` 下载包，然后导入包
+
+  ````R
+  opar <- par(no.readonly = TRUE)
+  # 首先设置要呈现 2*2=4 四张图
+  par(mfrow = c(2,2))
+  # 创建向量
+  x <- c(10, 12, 4, 16, 8)
+  # 创建字符串向量
+  lab <- c("US", "UK", "Australia", "Germany", "France")
+  # 绘制饼图 
+  pie(x, lab, main="Simple pie chart")
+  
+  # 根据向量 x 计算相应比率
+  pct <- round(x/sum(x)*100)
+  # 然后使用字符串拼接得到新的字符串向量
+  lab1 <- paste(lab, " ", pct, "%", sep = " ")
+  lab1
+  # 根据lab1的长度生成相应数量的彩虹色
+  pie(x, lab1, col=rainbow(length(lab1)), main="Pie chart with percentage")
+  # 记得导入包
+  library(plotrix)
+  # 绘制 3D 图，explode 表示饼之间的间隙
+  pie3D(x, explode = 0.1, main = "3D pie chart")
+  # 绘制扇形图
+  fan.plot(x, labels = lab, main = "Fan plot")
+  ````
+
+  另外，关于更多的颜色使用，可查看下面的网址：[https://zhuanlan.zhihu.com/p/392009162](https://zhuanlan.zhihu.com/p/392009162)

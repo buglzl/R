@@ -341,7 +341,7 @@ newlist
 
 **plot 的部分参数**
 
-![](images\plot_args.png)
+![](images/plot_args.png)
 
 **plot 指定颜色的部分参数**
 
@@ -378,11 +378,11 @@ plot(dose, drugA, type="b", lty=6, pch=11, cex=3, lwd=3, col=rgb(1,0.2,0.4))
 
 指定文本
 
-![](images\plot_args_text.png)
+![](images/plot_args_text.png)
 
 坐标轴
 
-![](images\plot_args_axis.png)
+![](images/plot_args_axis.png)
 
 文本例子
 
@@ -450,7 +450,7 @@ abline(v=2, lty=1, col="blue")
 
 * 图例例子
 
-![](images\legend.png)
+![](images/legend.png)
 
 ```R
 # 设置数据向量
@@ -472,7 +472,7 @@ legend("topleft", inset=0.05, title="类型", legend=c("A", "B"), lty=c(1,2), co
 
 * 添加文本
 
-  ![](images\text&mtext.png)
+  ![](images/text&mtext.png)
 
   示例
 
@@ -548,7 +548,7 @@ legend("topleft", inset=0.05, title="类型", legend=c("A", "B"), lty=c(1,2), co
   boxplot(wt, horizontal=TRUE,axes=FALSE)
   ````
 
-  ![](images\fig.png)
+  ![](images/fig.png)
 
 ## 视频16
 
@@ -665,7 +665,7 @@ legend("topleft", inset=0.05, title="类型", legend=c("A", "B"), lty=c(1,2), co
   datas
   ```
 
-  ![](images\date.png)
+  ![](images/date.png)
 
 * 数据类型的判断和转换
 
@@ -818,7 +818,7 @@ legend("topleft", inset=0.05, title="类型", legend=c("A", "B"), lty=c(1,2), co
 
 * 概率函数
 
-​	![](images\probility.png)
+​	![](images/probility.png)
 
 ````R
 # pretty 均匀地生成30个 -3到3 数 
@@ -1070,6 +1070,8 @@ cat("I love", "you")
 
 ## 视频 25
 
+注意使用命令 `install.packages("sm")` 下载包
+
 * 核密度图
 
   ````R
@@ -1089,7 +1091,7 @@ cat("I love", "you")
 
 * 箱线图
 
-![](images\boxplot.png)
+![](images/boxplot.png)
 
 其中有些点可能在直线部分算是异常值
 
@@ -1099,4 +1101,20 @@ boxplot(mpg, main="box plot", ylab="Miles per gallon")
 # mpg~cyl: 这是箱线图的数据设置。mpg 是要绘制的Y轴变量（在这里是"每加仑英里数"，即汽车的燃油效率），而 cyl 是X轴变量（在这里是"汽缸数"，即汽车引擎的汽缸数量）。~ 符号表示以 cyl 为条件对 mpg 进行分组，即将数据按照不同汽缸数进行分组并绘制箱线图。
 boxplot(mpg~cyl,data=mtcars,main="Car mileage data", xlab = "Number of cylinders", ylab = "Miles per gallon")
 ````
+
+
+
+## 视频 27
+
+注意使用命令 `install.packages("DMwR2")`
+
+此处想使用海藻的数据来做一组实例。
+
+首先是导入包 `DMwR2`，然后使用列表 `algae`
+
+使用命令 `head(algae)` 来看看前 6 行数据和其相应的列
+
+同时使用命令 `summary(algae)` 对列进行总结，同时还可以总结出其对应有多少 `NA` 值。
+
+`summary()`：获取描述性统计量，可以提供最小值、最大值、四分位数和数值型变量的均值，以及因子向量和逻辑型向量的频数统计等。
 

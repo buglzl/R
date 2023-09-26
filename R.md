@@ -1106,6 +1106,12 @@ boxplot(mpg~cyl,data=mtcars,main="Car mileage data", xlab = "Number of cylinders
 
 ## 视频 27
 
+此视频所作工作：
+
+![](images/algae.png)
+
+也就是：**从样品中预测7种藻类频率**
+
 注意使用命令 `install.packages("DMwR2")`
 
 此处想使用海藻的数据来做一组实例。
@@ -1117,4 +1123,56 @@ boxplot(mpg~cyl,data=mtcars,main="Car mileage data", xlab = "Number of cylinders
 同时使用命令 `summary(algae)` 对列进行总结，同时还可以总结出其对应有多少 `NA` 值。
 
 `summary()`：获取描述性统计量，可以提供最小值、最大值、四分位数和数值型变量的均值，以及因子向量和逻辑型向量的频数统计等。
+
+````R
+# 获取数据框 algae 中 mxPH 的直方图
+hist(algae$mxPH) 
+# 如果直接使用这条语句，在hist中画图将会不明显，因为y轴并不是密度
+# density是计算向量在的密度，然后lines就是把这些密度点连接起来
+lines(density(algae$mxPH, na.rm = T))
+# 因此，为了充分展示上一行代码，要设置新的直方图
+hist(algae$mxPH, prob = T, ylim=0:1)
+# 然后使用下面的代码就能很好的展示密度曲线了
+lines(density(algae$mxPH, na.rm = T))
+````
+
+总结：此视频就是告诉我们怎么展示密度直方图以及曲线展示
+
+### 视频 28
+
+这一节主要是讲数据预处理，重点在于如果数据缺失改如何处理呢
+
+![](images/preprocessing.png)
+
+````R
+# 首先这行代码要分两部分来看
+# 首先是 complete.cases(algae)就是要找行没有缺失值的下标，那么加上! 就是找有缺失值的下表
+# 然后 algae[下标向量, ] 就是输出这些下标所对应的行
+algae[!complete.cases(algae), ]
+# 下面这行代码就是输出数据框 algae 中缺失值比较多的行的下表
+manyNAs(algae)
+# 那么如何来定义多 不同人有不同的理解 因此可以自行设置参数
+# 下面这行代码的 0.2 就是表示在该行中缺失值和所占比例大于 0.2 时就输出该行，事实上，默认值就是 0.2
+# 可以自行调整到 0.1 看看效果
+manyNAs(algae, 0,2)
+# 首先第一种处理缺失值的方法就是直接删掉具有缺失值的行
+x <- na.omit(algae)
+# 然后通过这个操作方法输出的行为空，因此说明已经删了具有缺失值的行
+x[!complete.cases(x), ]
+# 当然，也可以手动删除特定的行，不过得先知道它是有缺失值的
+x <- algae[-c(62,199), ]
+# 可以通过该代码发现比原来的少两行
+x[!complete.cases(x), ]
+# 第二种方法就是找变量之间的相关性
+# algae[, 4:18] 就是 4 到 18 列的数据，use="complete.obs" 值使用没有空值的数据 cor 就是建立相关系数矩阵
+cor(algae[, 4:18], use="complete.obs")
+# 但是直接使用 cor 不够直观，因此，使用 sysnum 可以可视化这个结果
+symnum(cor(algae[, 4:18], use="complete.obs"))
+# 那么根据这个图 相关系数越接近 1 说明相关性越大，此处说明 PO4 和 oPO4 具有线性关系，因此构建线性回归模型
+# 先是去掉缺失值比较多的行
+x <- algae[-manyNAs(algae), ]
+#然后建立线性关系 得到：PO4 = 42.897 + 1.293 * oPO4
+# 这样的话如果一行数据 PO4 是缺失值，可以根据 oPO4 值得到，相反也是如此
+lm(PO4~oPO4, data = x)
+````
 
